@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  bool isObscurePassword = true;
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool isObscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,12 +93,16 @@ class _ProfilePageState extends State<ProfilePage> {
     return Padding(
       padding: EdgeInsets.only(bottom: 30),
       child: TextField(
-        obscureText: isPasswordTextField ? true : false,
+        obscureText: isPasswordTextField ? isObscurePassword : false,
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(
                     icon: Icon(Icons.remove_red_eye, color: Colors.grey),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isObscurePassword =! isObscurePassword;
+                      });
+                    },
                   )
                 : null,
             contentPadding: EdgeInsets.only(bottom: 5),
