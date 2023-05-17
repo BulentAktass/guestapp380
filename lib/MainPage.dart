@@ -89,7 +89,7 @@ class _MainPageState extends State<MainPage> {
                     itemCount: partiler.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                                leading: Icon(Icons.album, size: 45),
+                                leading: Image.asset('lib/icons/mandancing.png',height: 45,),
                                 title: Text(partiler[index]["Name"]),
                                 subtitle: Text(partiler[index]["Description"]),
                                 trailing: Text(partiler[index]["DateTime"]),
