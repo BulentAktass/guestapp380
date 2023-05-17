@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               //Hellotext
               Text('GUEST',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.white),),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.purple),),
               SizedBox(height: 8),
               Text('                                     Events and more...',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),),
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed:(){
                             Navigator.push(context,
                               MaterialPageRoute(builder: (context) => MainPage()),);
-                          }, child: Text("Login"),
+                          }, child: Text("Login",style: TextStyle(color:Colors.white),),
                         ),
                       ),
                   ),

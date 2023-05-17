@@ -46,6 +46,7 @@ class CreateParty extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     decoration: InputDecoration(
+
                       border: OutlineInputBorder(),
                       labelText: 'Party Name',
                     ),
