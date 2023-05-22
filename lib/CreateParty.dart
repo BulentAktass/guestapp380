@@ -18,12 +18,14 @@ class CreateParty extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 60),
-                Text("CREATE YOUR OWN PARTY!!!", style: TextStyle(fontSize: 25,),),
+                Text("CREATE YOUR OWN PARTY!!", style: TextStyle(fontSize: 25, ),),
                 SizedBox(height: 20),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     decoration: InputDecoration(
+
                       border: OutlineInputBorder(),
                       labelText: 'Party Name',
                     ),
@@ -42,6 +44,7 @@ class CreateParty extends StatelessWidget {
                     description = value;
                   },),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
