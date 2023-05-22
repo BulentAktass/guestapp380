@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class CreateParty extends StatelessWidget {
@@ -8,27 +7,6 @@ class CreateParty extends StatelessWidget {
   late String datetime;
 
   final CollectionReference partylist = FirebaseFirestore.instance.collection("Parties");
-
-  Future<void> createParty(String partyname,String description,String datetime,String uid) async{
-    return await partylist.doc(uid).set({
-
-    });
-  }
-
-  Future getPartyList() async{
-    List parties = [];
-    try{
-    await partylist.get().then((QuerySnapshot){
-      QuerySnapshot.docs.forEach((element) {
-        parties.add(element.data());
-        });
-      });
-    return parties;
-    } catch(e){
-      print(e.toString());
-      return null;
-      }
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(

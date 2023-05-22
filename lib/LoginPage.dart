@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               //Hellotext
               Text('GUEST',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.white),),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.purple),),
               SizedBox(height: 8),
               Text('                                     Events and more...',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),),
@@ -101,23 +101,23 @@ class _LoginPageState extends State<LoginPage> {
 
               //sign button
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                            elevation: 0,),
-                          onPressed:(){
-                            Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => MainPage()),);
-                          }, child: Text("Login"),
-                        ),
-                      ),
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(14),
                   ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,),
+                    onPressed:(){
+                      Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MainPage()),);
+                    }, child: Text("Login",style: TextStyle(color:Colors.white),),
+                  ),
+                ),
+              ),
 
               SizedBox(height: 20),
               Row(
