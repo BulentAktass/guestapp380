@@ -56,13 +56,15 @@ class CreateParty extends StatelessWidget {
                     datetime = value;
                   },),
                 ),
+
                 ElevatedButton(
                   child: Text("LETS GIVE A PARTY"),
                   onPressed: () async{
                     await partylist.add({
                       'Name' : partyname,
                       'Description' : description,
-                      'DateTime' : datetime
+                      'DateTime' : datetime,
+                      'PartyOwner' : "BUNU HALLEDİCEZ Bİ ŞEKİL",
                     });
                   },
                 )

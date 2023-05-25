@@ -88,12 +88,31 @@ class _MainPageState extends State<MainPage> {
                 child: ListView.builder(
                     itemCount: partiler.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Icon(Icons.ac_unit,),
-                        title: Text(partiler[index]["Name"]),
-                        subtitle: Text(partiler[index]["Description"]),
-                        trailing: Text(partiler[index]["DateTime"]),
-                        onTap: () => Navigator.push( context, MaterialPageRoute(builder: (context) => PartyDetails(length: index,))),
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.lightGreen, // Background color of the container
+                            borderRadius: BorderRadius.circular(20.0), // Rounded corners for the container
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.6), // Shadow color
+                                blurRadius: 3.0, // Spread radius of the shadow
+                                offset: Offset(0, 3), // Offset of the shadow
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            tileColor: Colors.grey[200], // Background color
+                            contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                            leading: Icon(Icons.ac_unit,),
+                            title: Text(partiler[index]["Name"]),
+                            subtitle: Text(partiler[index]["PartyOwner"]),
+                            trailing: Text(partiler[index]["DateTime"]),
+
+                            onTap: () => Navigator.push( context, MaterialPageRoute(builder: (context) => PartyDetails(length: index,))),
+                          ),
+                        ),
                       );
                     }),
               ),

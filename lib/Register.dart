@@ -1,120 +1,216 @@
 import 'package:flutter/material.dart';
+import 'package:guestapp380/firebaseActivition.dart';
+import 'package:guestapp380/LoginPage.dart';
 
-class ProfilePage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  bool isObscurePassword = true;
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordAgainController =
+  TextEditingController();
+
+  AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Your Profile"),
-
-      ),
-      body: Container(
-        padding: EdgeInsets.only(left: 15, top: 20, right: 15),
-        child: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).unfocus();
-            },
-            child: ListView(
-              children: [
-                Center(
-                  child: Stack(
+        body: Stack(
+          children: [
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage("https://wallpaperaccess.com/full/4325152.jpg"),fit: BoxFit.fill)),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 130,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 4, color: Colors.white),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
+                      TextField(
+                          controller: _nameController,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.white,
                             ),
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png"), //BURAYA FİREBASE OLAYLARI-------------------
+                            hintText: 'User ID',
+                            prefixText: ' ',
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.white,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                          )),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      TextField(
+                          controller: _emailController,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.mail,
+                              color: Colors.white,
+                            ),
+                            hintText: 'E-Mail',
+                            prefixText: ' ',
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.white,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                          )),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      TextField(
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          cursorColor: Colors.white,
+                          controller: _passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.vpn_key,
+                              color: Colors.white,
+                            ),
+                            hintText: 'Password',
+                            prefixText: ' ',
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.white,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                          )),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      TextField(
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          cursorColor: Colors.white,
+                          controller: _passwordAgainController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.vpn_key,
+                              color: Colors.white,
+                            ),
+                            hintText: 'Write your password again',
+                            prefixText: ' ',
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.white,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                          )),
+                      SizedBox(
+                        height: size.height * 0.08,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _authService
+                              .createAccount(
+                              _nameController.text,
+                              _emailController.text,
+                              _passwordController.text)
+                              .then((value) {
+                            return Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 5),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white, width: 2),
+                              //color: colorPrimaryShade,
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(30))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Center(
+                                child: Text(
+                                  "Save",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                )),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 5),
-                buildTextField("Full Name", "Enter your Full Name", false),
-                buildTextField("Age", "Your Age", false),
-                buildTextField("E-mail", "example@hotmail.com", false),
-                buildTextField("Password", "***********", true),
-                buildTextField("Location", "Your Location", false),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+            ),
+            Padding(
+              padding:
+              EdgeInsets.only(top: size.height * .06, left: size.width * .02),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Row(
                   children: [
-                    OutlinedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "CANCEL",
-                        style: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.black,
-                        ),
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.arrow_back_ios_outlined,
+                        color: Colors.blue.withOpacity(.75),
+                        size: 26,
                       ),
                     ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "SAVE",
-                          style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.white,
-                          ),
-                        )),
+                    SizedBox(
+                      width: size.width * 0.3,
+                    ),
+                    Text(
+                      "Register",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white.withOpacity(.75),
+                          fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
-              ],
-            )),
-      ),
-    );
-  }
-
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 30),
-      child: TextField(
-        obscureText: isPasswordTextField ? isObscurePassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-              icon: Icon(Icons.remove_red_eye, color: Colors.grey),
-              onPressed: () {
-                setState(() {
-                  isObscurePassword =! isObscurePassword;
-                });
-              },
+              ),
             )
-                : null,
-            contentPadding: EdgeInsets.only(bottom: 5),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            )),
-      ),
-    );
+          ],
+        ));
   }
 }

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class firebaseActivition extends StatelessWidget{
 
@@ -29,6 +31,15 @@ class firebaseActivition extends StatelessWidget{
     });
     return parties[index]["Name"];
   }
+  Future<String> getPartyOwner(index) async{
+    List parties = [];
+    await partylist.get().then((QuerySnapshot){
+      QuerySnapshot.docs.forEach((element) {
+        parties.add(element.data());
+      });
+    });
+    return parties[index]["PartyOwner"];
+  }
   Future<String> getPartyDescription(index) async{
     List parties = [];
     await partylist.get().then((QuerySnapshot){
@@ -47,10 +58,40 @@ class firebaseActivition extends StatelessWidget{
     });
     return parties[index]["DateTime"];
   }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     throw UnimplementedError();
+  }
+}
+
+class AuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<User?> signIn(String email, String password) async {
+    var user = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
+    return user.user;
+  }
+
+  signOut() async {
+    return await _auth.signOut();
+  }
+
+  String? getUser(){
+    return _auth.currentUser?.displayName;
+  }
+
+  Future<User?> createAccount(String name, String email, String password) async {
+    var user = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+
+    await _firestore
+        .collection("Account")
+        .doc(user.user!.uid)
+        .set({'userName': name, 'email': email});
+
+    return user.user;
   }
 }

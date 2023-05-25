@@ -48,6 +48,18 @@ class PartyDetails extends StatelessWidget {
                 }
               },
             ),
+            FutureBuilder<String>(
+              future: firebaseActivition().getPartyOwner(length),
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data.toString());
+                } else if (snapshot.hasError) {
+                  return Text("Error: ${snapshot.error}");
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
           ],
         ),
       ),
