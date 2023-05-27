@@ -86,6 +86,7 @@ class _MainPageState extends State<MainPage> {
             Expanded(
               child: Container(
                 child: ListView.builder(
+                  itemExtent: 130,
                     itemCount: partiler.length,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -105,11 +106,12 @@ class _MainPageState extends State<MainPage> {
                           child: ListTile(
                             tileColor: Colors.grey[200], // Background color
                             contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                            leading: Icon(Icons.ac_unit,),
+                            leading: Container(
+                              child: Image.network('https://as2.ftcdn.net/v2/jpg/01/20/87/67/1000_F_120876722_dJlNWgyMJxnhLzuA6e9cKRypSECZVQjy.jpg', fit: BoxFit.cover,),
+                            ),
                             title: Text(partiler[index]["Name"]),
                             subtitle: Text(partiler[index]["PartyOwner"]),
                             trailing: Text(partiler[index]["DateTime"]),
-
                             onTap: () => Navigator.push( context, MaterialPageRoute(builder: (context) => PartyDetails(length: index,))),
                           ),
                         ),
