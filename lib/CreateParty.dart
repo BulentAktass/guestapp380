@@ -1,10 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:guestapp380/MainPage.dart';
+import 'package:guestapp380/firebaseActivition.dart';
 
-class CreateParty extends StatelessWidget {
+class CreateParty extends StatefulWidget {
+  @override
+  State<CreateParty> createState() => _CreatePartyState();
+}
+
+class _CreatePartyState extends State<CreateParty> {
   late String partyname;
+
   late String description;
+
   late String datetime;
+
+  late String partyowner;
 
   final CollectionReference partylist = FirebaseFirestore.instance.collection("Parties");
 
@@ -60,12 +71,21 @@ class CreateParty extends StatelessWidget {
                 ElevatedButton(
                   child: Text("LETS GIVE A PARTY"),
                   onPressed: () async{
+                    firebaseActivition().loadUsername().then((value) {
+                      setState(() {
+                        partyowner = value;
+                      });
+                    });
                     await partylist.add({
+                      'PartyOwner' : partyowner,
                       'Name' : partyname,
                       'Description' : description,
                       'DateTime' : datetime,
-                      'PartyOwner' : "BUNU HALLEDİCEZ Bİ ŞEKİL",
                     });
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainPage()));
                   },
                 )
               ],

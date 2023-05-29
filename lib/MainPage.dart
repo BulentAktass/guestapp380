@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guestapp380/CreateParty.dart';
+import 'package:guestapp380/MyParties.dart';
 import 'package:guestapp380/ProfilePage.dart';
 import 'package:guestapp380/PartyDetails.dart';
 import 'package:guestapp380/firebaseActivition.dart';
@@ -70,6 +71,12 @@ class _MainPageState extends State<MainPage> {
               onTap: () => Navigator.push( context,
                 MaterialPageRoute(builder: (context) => CreateParty()),),
             ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('My Parties'),
+              onTap: () => Navigator.push( context,
+                MaterialPageRoute(builder: (context) => MyParties()),),
+            ),
           ],
         ),
       ),
@@ -93,13 +100,13 @@ class _MainPageState extends State<MainPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.lightGreen, // Background color of the container
-                            borderRadius: BorderRadius.circular(20.0), // Rounded corners for the container
+                            color: Colors.lightGreen,
+                            borderRadius: BorderRadius.circular(20.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.6), // Shadow color
-                                blurRadius: 3.0, // Spread radius of the shadow
-                                offset: Offset(0, 3), // Offset of the shadow
+                                color: Colors.grey.withOpacity(0.6),
+                                blurRadius: 3.0,
+                                offset: Offset(0, 3),
                               ),
                             ],
                           ),
@@ -110,7 +117,10 @@ class _MainPageState extends State<MainPage> {
                               child: Image.network('https://as2.ftcdn.net/v2/jpg/01/20/87/67/1000_F_120876722_dJlNWgyMJxnhLzuA6e9cKRypSECZVQjy.jpg', fit: BoxFit.cover,),
                             ),
                             title: Text(partiler[index]["Name"]),
-                            subtitle: Text(partiler[index]["PartyOwner"]),
+                            subtitle: Text(
+                              partiler[index]["Description"],
+                              overflow: TextOverflow.ellipsis,
+                            ),
                             trailing: Text(partiler[index]["DateTime"]),
                             onTap: () => Navigator.push( context, MaterialPageRoute(builder: (context) => PartyDetails(length: index,))),
                           ),

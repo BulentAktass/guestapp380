@@ -31,6 +31,16 @@ class firebaseActivition extends StatelessWidget{
     });
     return parties[index]["Name"];
   }
+
+  Future<String> loadUsername() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final DocumentSnapshot snapshot =
+      await FirebaseFirestore.instance.collection('Account').doc(user.uid).get();
+      return snapshot['userName'];
+    }
+    return '( USERNAME CANT LOADED )';
+  }
   Future<String> getPartyOwner(index) async{
     List parties = [];
     await partylist.get().then((QuerySnapshot){
@@ -79,9 +89,6 @@ class AuthService {
     return await _auth.signOut();
   }
 
-  String? getUser(){
-    return _auth.currentUser?.displayName;
-  }
 
   Future<User?> createAccount(String name, String email, String password) async {
     var user = await _auth.createUserWithEmailAndPassword(
