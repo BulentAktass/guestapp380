@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:guestapp380/PartyDetails.dart';
 
 class MyParties extends StatefulWidget {
   @override
@@ -33,53 +32,59 @@ class _MyPartiesState extends State<MyParties> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255,45,19,44),
+          ),
           child: Column(
               children: [
                 SizedBox(height: 40),
-                Text("MY EVENTS",style: TextStyle(fontSize: 30)),
+                Align(
+                  alignment: Alignment.topRight,
+                    child: Text("MY EVENTS  ",style: TextStyle(fontSize: 30,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w600))),
+                SizedBox(height: 10,),
                 Expanded(
                     child: ListView.builder(
-                        itemExtent: 130,
                         itemCount: partiler.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.lightGreen,
-                                // Background color of the container
+                                color: Color.fromARGB(255,238,69,64),
                                 borderRadius: BorderRadius.circular(20.0),
-                                // Rounded corners for the container
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.6),
-                                    // Shadow color
-                                    blurRadius: 3.0,
-                                    // Spread radius of the shadow
-                                    offset: Offset(0, 3), // Offset of the shadow
-                                  ),
-                                ],
                               ),
                               child: ListTile(
                                 tileColor: Colors.grey[200],
                                 // Background color
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 16.0),
-                                leading: Container(
-                                  child: Image.network(
-                                    'https://as2.ftcdn.net/v2/jpg/01/20/87/67/1000_F_120876722_dJlNWgyMJxnhLzuA6e9cKRypSECZVQjy.jpg',
-                                    fit: BoxFit.cover,),
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0), // Adjust the value as needed
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 1.5,)
+                                    ),
+                                    child: Image.network(
+                                      'https://as2.ftcdn.net/v2/jpg/01/20/87/67/1000_F_120876722_dJlNWgyMJxnhLzuA6e9cKRypSECZVQjy.jpg',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-                                title: Text(partiler[index]["Name"]),
+                                title: Text(partiler[index]["Name"],style: TextStyle(fontSize: 18),),
                                 subtitle: Text(
                                   partiler[index]["Description"],
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 trailing: Text(partiler[index]["DateTime"]),
+                                /*
                                 onTap: () =>
                                     Navigator.push(
                                         context, MaterialPageRoute(builder: (
                                         context) => PartyDetails(length: index,))),
+
+                                 */
                               ),
                             ),
                           );

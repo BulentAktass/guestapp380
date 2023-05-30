@@ -25,22 +25,32 @@ class _CreatePartyState extends State<CreateParty> {
     return Scaffold(
         body: Center(
           child: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(image: NetworkImage("https://camo.githubusercontent.com/ec9d627e96a9a77c1a18eb08ce9f7d15bfcaf6b3736c55d469ea2973b72fe8fe/687474703a2f2f692e696d6775722e636f6d2f494d524c6c39442e706e67"),fit: BoxFit.fill)
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255,45,19,44),
             ),
             child: Column(
               children: [
                 SizedBox(height: 60),
-                Text("CREATE YOUR OWN PARTY!!", style: TextStyle(fontSize: 25, ),),
+                Text("CREATE YOUR OWN PARTY!!",style: TextStyle(fontSize: 27,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w400)),
                 SizedBox(height: 20),
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-
-                      border: OutlineInputBorder(),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255,238,69,64),
+                        )
+                      ),
                       labelText: 'Party Name',
+                      labelStyle: TextStyle(
+                        color: Colors.white, // Set the label text color to white
+                      ),
                     ),
                     onChanged: (value){
                     partyname = value;
@@ -49,9 +59,20 @@ class _CreatePartyState extends State<CreateParty> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255,238,69,64),
+                          )
+                      ),
                       labelText: 'Party Description',
+                      labelStyle: TextStyle(
+                        color: Colors.white, // Set the label text color to white
+                      ),
                     ),
                     onChanged: (value){
                     description = value;
@@ -61,9 +82,20 @@ class _CreatePartyState extends State<CreateParty> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255,238,69,64),
+                          )
+                      ),
                       labelText: 'Date Time',
+                      labelStyle: TextStyle(
+                        color: Colors.white, // Set the label text color to white
+                      ),
                     ),
                     onChanged: (value){
                     datetime = value;
@@ -72,16 +104,31 @@ class _CreatePartyState extends State<CreateParty> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255,238,69,64),
+                          )
+                      ),
                       labelText: 'Location',
+                      labelStyle: TextStyle(
+                        color: Colors.white, // Set the label text color to white
+                      ),
                     ),
                     onChanged: (value){
                       location = value;
                     },),
                 ),
-
+                SizedBox(height: 19),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255,238,69,64)), // Set the background color to red
+                    // Additional button style properties
+                  ),
                   child: Text("LETS GIVE A PARTY"),
                   onPressed: () async{
                     firebaseActivition().loadUsername().then((value) {

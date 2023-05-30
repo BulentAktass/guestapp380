@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   //Hellotext
                   Text('GUEST',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.purple),),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.white),),
                   SizedBox(height: 8),
                   Text('                                     Events and more...',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),),

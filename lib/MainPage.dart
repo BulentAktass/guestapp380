@@ -38,91 +38,116 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       key: _scaffkey,
       drawer: Drawer(
+        backgroundColor: Color.fromARGB(255,238,69,64),
         child: ListView(
           padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                    "https://wallpaperaccess.com/full/4325152.jpg",
-                  ),
-                  fit: BoxFit.cover,
+          children:[
+            SizedBox(height:55),
+            Align(
+              alignment: Alignment.center,
+                child: Text("GUEST",style: TextStyle(color: Color.fromARGB(255,45,19,44),fontSize: 35,letterSpacing: 3),)
+            ),
+            SizedBox(height:45),
+            Padding(
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,45,19,44),
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
-                color: Colors.blueGrey,
-              ),
-              child: Text(
-                'GUEST',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 27,
+                child: ListTile(
+                  leading: Icon(Icons.account_circle,color: Color.fromARGB(255,238,69,64),),
+                  title: Text('Profıle',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  onTap: () => Navigator.push( context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),),
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
-              onTap: () => Navigator.push( context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),),
+            Padding(
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,45,19,44),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.add_circle_outline,color: Color.fromARGB(255,238,69,64),),
+                  title: Text('Create Party',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  onTap: () => Navigator.push( context,
+                    MaterialPageRoute(builder: (context) => CreateParty()),),
+                ),
+              ),
             ),
-            ListTile(
-              leading: Icon(Icons.add_location_alt_sharp),
-              title: Text('Create Party'),
-              onTap: () => Navigator.push( context,
-                MaterialPageRoute(builder: (context) => CreateParty()),),
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('My Parties'),
-              onTap: () => Navigator.push( context,
-                MaterialPageRoute(builder: (context) => MyParties()),),
+            Padding(
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,45,19,44),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.local_fire_department_outlined,color: Color.fromARGB(255,238,69,64),),
+                  title: Text('My Parties',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  onTap: () => Navigator.push( context,
+                    MaterialPageRoute(builder: (context) => MyParties()),),
+                ),
+              ),
             ),
           ],
         ),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255,45,19,44),
+        ),
         child: Column(
           children:[
-            SizedBox(height: 40),
+            SizedBox(height: 45),
             Row(
               children:[
-                IconButton(alignment: Alignment.topLeft,icon: Icon(Icons.menu),color: Colors.black,onPressed: () => _scaffkey.currentState?.openDrawer()),
-                Text("EVENTS",style: TextStyle(fontSize: 30), textAlign: TextAlign.right,),
+                SizedBox(width: 5),
+                IconButton(alignment: Alignment.topLeft,icon: Icon(Icons.menu,size: 32,),color: Color.fromARGB(255,238,69,64),onPressed: () => _scaffkey.currentState?.openDrawer()),
+                SizedBox(width: 230),
+                Text("EVENTS",style: TextStyle(fontSize: 30,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w600)),
               ],
             ),
             Expanded(
               child: Container(
                 child: ListView.builder(
-                  itemExtent: 130,
                     itemCount: partiler.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.lightGreen,
+                            color: Color.fromARGB(255,238,69,64),
                             borderRadius: BorderRadius.circular(20.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.6),
-                                blurRadius: 3.0,
-                                offset: Offset(0, 3),
-                              ),
-                            ],
                           ),
                           child: ListTile(
                             tileColor: Colors.grey[200], // Background color
                             contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                            leading: Container(
-                              child: Image.network('https://as2.ftcdn.net/v2/jpg/01/20/87/67/1000_F_120876722_dJlNWgyMJxnhLzuA6e9cKRypSECZVQjy.jpg', fit: BoxFit.cover,),
-                            ),
-                            title: Text(partiler[index]["Name"]),
+                            leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0), // Adjust the value as needed
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.black,
+                                        width: 1.5,)
+                                  ),
+                                  child: Image.network(
+                                    'https://as2.ftcdn.net/v2/jpg/01/20/87/67/1000_F_120876722_dJlNWgyMJxnhLzuA6e9cKRypSECZVQjy.jpg',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+
+                            title: Text(partiler[index]["Name"],style: TextStyle(fontSize: 18),),
                             subtitle: Text(
                               partiler[index]["Description"],
                               overflow: TextOverflow.ellipsis,
                             ),
                             trailing: Text(partiler[index]["DateTime"]),
-                            onTap: () => Navigator.push( context, MaterialPageRoute(builder: (context) => PartyDetails(length: index,))),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PartyDetails(length: index,))),
                           ),
                         ),
                       );

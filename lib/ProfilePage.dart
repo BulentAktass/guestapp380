@@ -45,6 +45,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255,45,19,44),
+        ),
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,75 +55,116 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
-              child: Text(
-                'Profile Details',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'Profıle Detaıls  ',
+                  style: TextStyle(
+                    color: Color.fromARGB(255,238,69,64),
+                    fontSize: 30,letterSpacing: 2,
+                  ),
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.person),
-              title: Text(
-                'Username:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+            SizedBox(height: 20),
+            Padding(
+                padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,238,69,64),
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
-              ),
-              subtitle: Text(
-                '$userName',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.email),
-              title: Text(
-                'Email:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              subtitle: Text(
-                '$email',
-                style: TextStyle(
-                  fontSize: 18,
+                child: ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text(
+                    'Username:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '$userName',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.location_on),
-              title: Text(
-                'Location:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+
+            Padding(
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,238,69,64),
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
-              ),
-              subtitle: Text(
-                '$location',
-                style: TextStyle(
-                  fontSize: 18,
+                child: ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text(
+                    'Email:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '$email',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.cake),
-              title: Text(
-                'Age:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,238,69,64),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.location_on),
+                  title: Text(
+                    'Location:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '$location',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ),
-              subtitle: Text(
-                '$age',
-                style: TextStyle(
-                  fontSize: 18,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,238,69,64),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.cake),
+                  title: Text(
+                    'Age:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '$age',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ),
             ),
