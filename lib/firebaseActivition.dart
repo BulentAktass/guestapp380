@@ -59,6 +59,15 @@ class firebaseActivition extends StatelessWidget{
     });
     return parties[index]["Description"];
   }
+  Future<String> getPartyLocation(index) async{
+    List parties = [];
+    await partylist.get().then((QuerySnapshot){
+      QuerySnapshot.docs.forEach((element) {
+        parties.add(element.data());
+      });
+    });
+    return parties[index]["Location"];
+  }
   Future<String> getPartyDateTime(index) async{
     List parties = [];
     await partylist.get().then((QuerySnapshot){
@@ -90,14 +99,14 @@ class AuthService {
   }
 
 
-  Future<User?> createAccount(String name, String email, String password) async {
+  Future<User?> createAccount(String name, String email, String password, String Age, String Location) async {
     var user = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
     await _firestore
         .collection("Account")
         .doc(user.user!.uid)
-        .set({'userName': name, 'email': email});
+        .set({'userName': name, 'email': email, 'Age' : Age, 'Location' : Location});
 
     return user.user;
   }

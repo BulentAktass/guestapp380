@@ -20,12 +20,9 @@ class _MyPartiesState extends State<MyParties> {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final String currentUserId = user.uid;
-      final DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
-          .collection('Account').doc(currentUserId).get();
+      final DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('Account').doc(currentUserId).get();
       final String currentUserUsername = userSnapshot['userName'];
-      final QuerySnapshot partiesSnapshot = await FirebaseFirestore.instance
-          .collection('Parties')
-          .where('PartyOwner', isEqualTo: currentUserUsername).get();
+      final QuerySnapshot partiesSnapshot = await FirebaseFirestore.instance.collection('Parties').where('PartyOwner', isEqualTo: currentUserUsername).get();
       setState(() {
         partiler = partiesSnapshot.docs.map((doc) => doc.data()).toList();
       });

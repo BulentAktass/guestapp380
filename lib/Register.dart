@@ -11,8 +11,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordAgainController =
-  TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _LocationController = TextEditingController();
 
   AuthService _authService = AuthService();
 
@@ -43,6 +43,62 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.white,
                             ),
                             hintText: 'User ID',
+                            prefixText: ' ',
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.white,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                          )),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      TextField(
+                          controller: _ageController,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.calendar_month,
+                              color: Colors.white,
+                            ),
+                            hintText: 'Your Age',
+                            prefixText: ' ',
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.white,
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                )),
+                          )),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      TextField(
+                          controller: _LocationController,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.location_on,
+                              color: Colors.white,
+                            ),
+                            hintText: 'Location',
                             prefixText: ' ',
                             hintStyle: TextStyle(color: Colors.white),
                             focusColor: Colors.white,
@@ -114,31 +170,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(
                         height: size.height * 0.02,
                       ),
-                      TextField(
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                          cursorColor: Colors.white,
-                          controller: _passwordAgainController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.vpn_key,
-                              color: Colors.white,
-                            ),
-                            hintText: 'Write your password again',
-                            prefixText: ' ',
-                            hintStyle: TextStyle(color: Colors.white),
-                            focusColor: Colors.white,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                )),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                )),
-                          )),
                       SizedBox(
                         height: size.height * 0.08,
                       ),
@@ -148,7 +179,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               .createAccount(
                               _nameController.text,
                               _emailController.text,
-                              _passwordController.text)
+                              _passwordController.text,
+                              _ageController.text,
+                              _LocationController.text)
                               .then((value) {
                             return Navigator.push(
                                 context,

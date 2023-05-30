@@ -19,6 +19,8 @@ class _CreatePartyState extends State<CreateParty> {
 
   final CollectionReference partylist = FirebaseFirestore.instance.collection("Parties");
 
+  late String location;
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
@@ -67,6 +69,17 @@ class _CreatePartyState extends State<CreateParty> {
                     datetime = value;
                   },),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Location',
+                    ),
+                    onChanged: (value){
+                      location = value;
+                    },),
+                ),
 
                 ElevatedButton(
                   child: Text("LETS GIVE A PARTY"),
@@ -81,6 +94,7 @@ class _CreatePartyState extends State<CreateParty> {
                       'Name' : partyname,
                       'Description' : description,
                       'DateTime' : datetime,
+                      'Location' : location,
                     });
                     Navigator.push(
                         context,

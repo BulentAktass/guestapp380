@@ -1,120 +1,133 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isObscurePassword = true;
+  final CollectionReference accounts =
+  FirebaseFirestore.instance.collection("Account");
 
+  User? currentUser;
+  String? age;
+  String? location;
+  String? email;
+  String? userName;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCurrentUser();
+  }
+
+  void fetchCurrentUser() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final String currentUserId = user.uid;
+      final DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('Account').doc(currentUserId).get();
+      final String currentUserAge = userSnapshot['Age'];
+      final String currentUserLocation = userSnapshot['Location'];
+      final String currentUserEmail = userSnapshot['email'];
+      final String currentUserUsername = userSnapshot['userName'];
+      setState(() {
+        age = currentUserAge;
+        location = currentUserLocation;
+        email = currentUserEmail;
+        userName = currentUserUsername;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Your Profile"),
-
-      ),
       body: Container(
-        padding: EdgeInsets.only(left: 15, top: 20, right: 15),
-        child: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).unfocus();
-            },
-            child: ListView(
-              children: [
-                Center(
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: 130,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 4, color: Colors.white),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
-                            ),
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png"), //BURAYA FİREBASE OLAYLARI-------------------
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                'Profile Details',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 5),
-                buildTextField("Full Name", "Enter your Full Name", false),
-                buildTextField("Age", "Your Age", false),
-                buildTextField("E-mail", "example@hotmail.com", false),
-                buildTextField("Password", "***********", true),
-                buildTextField("Location", "Your Location", false),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "CANCEL",
-                        style: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "SAVE",
-                          style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.white,
-                          ),
-                        )),
-                  ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text(
+                'Username:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            )),
+              ),
+              subtitle: Text(
+                '$userName',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text(
+                'Email:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                '$email',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.location_on),
+              title: Text(
+                'Location:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                '$location',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.cake),
+              title: Text(
+                'Age:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                '$age',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 30),
-      child: TextField(
-        obscureText: isPasswordTextField ? isObscurePassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-              icon: Icon(Icons.remove_red_eye, color: Colors.grey),
-              onPressed: () {
-                setState(() {
-                  isObscurePassword =! isObscurePassword;
-                });
-              },
-            )
-                : null,
-            contentPadding: EdgeInsets.only(bottom: 5),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            )),
-      ),
-    );
-  }
 }

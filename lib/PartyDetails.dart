@@ -115,6 +115,32 @@ class PartyDetails extends StatelessWidget {
                   ),
                   SizedBox(height: 24),
                   Text(
+                    'Party Location',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  FutureBuilder<String>(
+                    future: firebaseActivition().getPartyLocation(length),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          snapshot.data.toString(),
+                          style: TextStyle(fontSize: 16),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text("Error: ${snapshot.error}");
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    },
+                  ),
+                  SizedBox(height: 24),
+                  Text(
                     'Party Owner',
                     style: TextStyle(
                       fontSize: 24,
