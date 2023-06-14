@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:guestapp380/MainPage.dart';
 import 'package:guestapp380/firebaseActivition.dart';
@@ -15,7 +16,11 @@ class _CreatePartyState extends State<CreateParty> {
 
   late String datetime;
 
+  late List<dynamic> participants = [];
+
   late String partyowner;
+
+  final User? user = FirebaseAuth.instance.currentUser;
 
   final CollectionReference partylist = FirebaseFirestore.instance.collection("Parties");
 
@@ -23,6 +28,7 @@ class _CreatePartyState extends State<CreateParty> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset : false,
         body: Center(
           child: Container(
             decoration: BoxDecoration(
@@ -137,11 +143,13 @@ class _CreatePartyState extends State<CreateParty> {
                       });
                     });
                     await partylist.add({
+                      'ownerUID' : user?.uid.toString(),
                       'PartyOwner' : partyowner,
                       'Name' : partyname,
                       'Description' : description,
                       'DateTime' : datetime,
                       'Location' : location,
+                      'participants' : participants,
                     });
                     Navigator.push(
                         context,

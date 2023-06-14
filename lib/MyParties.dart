@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:guestapp380/UsersPartyDetails.dart';
 
 class MyParties extends StatefulWidget {
   @override
@@ -78,13 +79,7 @@ class _MyPartiesState extends State<MyParties> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 trailing: Text(partiler[index]["DateTime"]),
-                                /*
-                                onTap: () =>
-                                    Navigator.push(
-                                        context, MaterialPageRoute(builder: (
-                                        context) => PartyDetails(length: index,))),
-
-                                 */
+                                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => UsersPartyDetails(length: index,))),
                               ),
                             ),
                           );

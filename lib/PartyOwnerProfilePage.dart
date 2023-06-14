@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfilePage extends StatefulWidget {
+class PartyOwnerProfilePage extends StatefulWidget {
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _PartyOwnerProfilePageState createState() => _PartyOwnerProfilePageState();
+  final String index;
+  const PartyOwnerProfilePage({Key? key, required this.index}) : super(key: key);
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _PartyOwnerProfilePageState extends State<PartyOwnerProfilePage> {
   final CollectionReference accounts =
   FirebaseFirestore.instance.collection("Account");
-
   User? currentUser;
   String? age;
   String? location;
@@ -26,9 +27,8 @@ class _ProfilePageState extends State<ProfilePage> {
   void fetchCurrentUser() async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      final String currentUserId = user.uid;
       final DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
-          .collection('Account').doc(currentUserId).get();
+          .collection('Account').doc(widget.index).get();
       final String currentUserAge = userSnapshot['Age'];
       final String currentUserLocation = userSnapshot['Location'];
       final String currentUserEmail = userSnapshot['email'];
@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(height: 20),
             Padding(
-                padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
               child: Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255,238,69,64),
