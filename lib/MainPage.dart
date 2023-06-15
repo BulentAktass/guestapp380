@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guestapp380/CreateParty.dart';
+import 'package:guestapp380/LoginPage.dart';
 import 'package:guestapp380/MyParties.dart';
 import 'package:guestapp380/ProfilePage.dart';
 import 'package:guestapp380/PartyDetails.dart';
@@ -90,6 +91,24 @@ class _MainPageState extends State<MainPage> {
                   title: Text('My Parties',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
                   onTap: () => Navigator.push( context,
                     MaterialPageRoute(builder: (context) => MyParties()),),
+                ),
+              ),
+            ),
+            SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.only(right: 10,left: 10,bottom: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255,45,19,44),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.logout,color: Color.fromARGB(255,238,69,64),),
+                  title: Text('Logout',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  onTap: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginPage())),
                 ),
               ),
             ),

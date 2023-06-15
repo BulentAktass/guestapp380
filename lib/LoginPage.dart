@@ -36,7 +36,6 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //Hellotext
                   Text('GUEST',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.white),),
                   SizedBox(height: 8),

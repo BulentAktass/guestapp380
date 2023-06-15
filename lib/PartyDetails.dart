@@ -1,11 +1,21 @@
+
 import 'package:flutter/material.dart';
 import 'package:guestapp380/PartyOwnerProfilePage.dart';
 import 'package:guestapp380/firebaseActivition.dart';
 
-class PartyDetails extends StatelessWidget {
+class PartyDetails extends StatefulWidget {
   final int length;
 
+  static String dialogMessage="";
+
   const PartyDetails({Key? key, required this.length}) : super(key: key);
+
+  @override
+  State<PartyDetails> createState() => _PartyDetailsState();
+}
+
+class _PartyDetailsState extends State<PartyDetails> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +58,7 @@ class PartyDetails extends StatelessWidget {
                           ),
                           SizedBox(height: 8),
                           FutureBuilder<String>(
-                            future: firebaseActivition().getPartyName(length),
+                            future: firebaseActivition().getPartyName(widget.length),
                             builder: (BuildContext context,
                                 AsyncSnapshot<String> snapshot) {
                               if (snapshot.hasData) {
@@ -70,7 +80,7 @@ class PartyDetails extends StatelessWidget {
                           ),
                           SizedBox(height: 8),
                           FutureBuilder<String>(
-                            future: firebaseActivition().getPartyDescription(length),
+                            future: firebaseActivition().getPartyDescription(widget.length),
                             builder: (BuildContext context,
                                 AsyncSnapshot<String> snapshot) {
                               if (snapshot.hasData) {
@@ -92,7 +102,7 @@ class PartyDetails extends StatelessWidget {
                           ),
                           SizedBox(height: 8),
                           FutureBuilder<String>(
-                            future: firebaseActivition().getPartyDateTime(length),
+                            future: firebaseActivition().getPartyDateTime(widget.length),
                             builder: (BuildContext context,
                                 AsyncSnapshot<String> snapshot) {
                               if (snapshot.hasData) {
@@ -114,7 +124,7 @@ class PartyDetails extends StatelessWidget {
                           ),
                           SizedBox(height: 8),
                           FutureBuilder<String>(
-                            future: firebaseActivition().getPartyLocation(length),
+                            future: firebaseActivition().getPartyLocation(widget.length),
                             builder: (BuildContext context,
                                 AsyncSnapshot<String> snapshot) {
                               if (snapshot.hasData) {
@@ -136,7 +146,7 @@ class PartyDetails extends StatelessWidget {
                           ),
                           SizedBox(height: 15),
                           FutureBuilder<String>(
-                            future: firebaseActivition().getPartyOwner(length),
+                            future: firebaseActivition().getPartyOwner(widget.length),
                             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                               if (snapshot.hasData) {
                                 return IntrinsicWidth(
@@ -155,7 +165,7 @@ class PartyDetails extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => FutureBuilder<String>(
-                                            future: firebaseActivition().getPartyOwnerUID(length),
+                                            future: firebaseActivition().getPartyOwnerUID(widget.length),
                                             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                                               if (snapshot.hasData) {
                                                 return PartyOwnerProfilePage(index: snapshot.data.toString());
@@ -188,7 +198,7 @@ class PartyDetails extends StatelessWidget {
                               ),
                               SizedBox(width: 40,),
                               FutureBuilder<List<dynamic>>(
-                                future: firebaseActivition().fetchPartyParticipants(length),
+                                future: firebaseActivition().fetchPartyParticipants(widget.length),
                                 builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
                                   if (snapshot.connectionState == ConnectionState.waiting) {
                                     return CircularProgressIndicator();
@@ -230,6 +240,68 @@ class PartyDetails extends StatelessWidget {
                               ),
                             ],
                           ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: [
+                              Text(
+                                  'Age range of the event:',
+                                  style: TextStyle(fontSize: 20,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w600)
+                              ),
+                              SizedBox(width: 15),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 238, 69, 64),
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: IntrinsicWidth(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(6.0),
+                                    child: Row(
+                                      children: [
+                                        FutureBuilder<int>(
+                                          future: firebaseActivition().getPartyunderage(widget.length),
+                                          builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                                            if (snapshot.hasData) {
+                                              return Text(
+                                                snapshot.data.toString(),
+                                                style: TextStyle(fontSize: 15, color: Colors.white),
+                                              );
+                                            } else if (snapshot.hasError) {
+                                              return Text(
+                                                'Error: ${snapshot.error}',
+                                                style: TextStyle(fontSize: 15, color: Colors.white),
+                                              );
+                                            } else {
+                                              return CircularProgressIndicator();
+                                            }
+                                          },
+                                        ),
+                                        Text( "  -  " ,style: TextStyle(fontSize: 15, color: Colors.white)),
+                                        FutureBuilder<int>(
+                                          future: firebaseActivition().getPartyupperage(widget.length),
+                                          builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                                            if (snapshot.hasData) {
+                                              return Text(
+                                                snapshot.data.toString(),
+                                                style: TextStyle(fontSize: 15, color: Colors.white),
+                                              );
+                                            } else if (snapshot.hasError) {
+                                              return Text(
+                                                'Error: ${snapshot.error}',
+                                                style: TextStyle(fontSize: 15, color: Colors.white),
+                                              );
+                                            } else {
+                                              return CircularProgressIndicator();
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           SizedBox(height: 20),
                           Center(
                               child: ElevatedButton(
@@ -240,7 +312,28 @@ class PartyDetails extends StatelessWidget {
                                   onPressed: () async {
                                     try {
                                       String username = await firebaseActivition().loadUsername();
-                                      await firebaseActivition().addParticipant(length, username);
+                                      await firebaseActivition().addParticipant(widget.length, username);
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            backgroundColor: Color.fromARGB(255,45,19,44),
+                                            content: Text(PartyDetails.dialogMessage, style: TextStyle(color: Color.fromARGB(255,238,69,64)),),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                  Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => PartyDetails(length: widget.length)));
+                                                },
+                                                child: Text('OK',style: TextStyle(color: Color.fromARGB(255,238,69,64))),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
                                     } catch (e) {
                                       print('Error adding participant: $e');
                                     }

@@ -222,31 +222,56 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
                     ),
 
                     SizedBox(height: 24),
-                    Text(
-                        'Participants',
-                        style: TextStyle(fontSize: 27,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w600)
+                    Row(
+                      children: [
+                        Text(
+                            'Participants List',
+                            style: TextStyle(fontSize: 27,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w600)
+                        ),
+                        SizedBox(width: 40,),
+                        FutureBuilder<List<dynamic>>(
+                          future: firebaseActivition().fetchPartyParticipants(widget.length),
+                          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return CircularProgressIndicator();
+                            } else if (snapshot.hasError) {
+                              return Text("Error: ${snapshot.error}");
+                            } else if (snapshot.hasData) {
+                              List<dynamic> participants = snapshot.data!;
+                              return DropdownButton<dynamic>(
+                                dropdownColor: Color.fromARGB(255,238,69,64),
+                                icon: Icon(
+                                  Icons.account_box_rounded,
+                                  color: Colors.white,
+                                ),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.white,
+                                ),
+                                elevation: 8,
+                                items: participants.map((participant) {
+                                  return DropdownMenuItem<dynamic>(
+                                    value: participant,
+                                    child: Text(participant.toString()),
+                                  );
+                                }).toList(),
+                                onChanged: (dynamic? selectedParticipant) {
+                                  // Handle the selected participant
+                                  print('Selected Participant: $selectedParticipant');
+                                },
+                              );
+                            } else {
+                              return Text("No participants found.");
+                            }
+                          },
+                        ),
+                      ],
                     ),
-                    /*
-                          FutureBuilder<List<dynamic>>(
-                            future: firebaseActivition().fetchParticipants(length),
-                            builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-                              if (snapshot.hasData) {
-                                List<dynamic> participants = snapshot.data ?? [];
-                                return ListView.builder(
-                                  itemCount: participants.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return ListTile(
-                                      title: Text(participants[index].toString()),
-                                    );
-                                  },
-                                );
-                              }else {
-                                return Text("Error: ${snapshot.error}");
-                              }
-                            },
-                          ),
-
-                           */
                   ],
                 ),
               ),

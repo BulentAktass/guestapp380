@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:guestapp380/MainPage.dart';
 import 'package:guestapp380/firebaseActivition.dart';
 
+
 class CreateParty extends StatefulWidget {
   @override
   State<CreateParty> createState() => _CreatePartyState();
@@ -19,6 +20,10 @@ class _CreatePartyState extends State<CreateParty> {
   late List<dynamic> participants = [];
 
   late String partyowner;
+  
+  late int upperlimit=0;
+  
+  late int underage=0;
 
   final User? user = FirebaseAuth.instance.currentUser;
 
@@ -129,6 +134,67 @@ class _CreatePartyState extends State<CreateParty> {
                       location = value;
                     },),
                 ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Required age range :", style: TextStyle(color: Colors.white,fontSize: 16,),),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          style: TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255,238,69,64),
+                                )
+                            ),
+                            labelStyle: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            int? parsedValue = int.tryParse(value);
+                            if (parsedValue != null) {
+                              underage = parsedValue;
+                            }
+                          },),
+                      ),
+                    ),
+                    Text(" - ", style: TextStyle(color: Colors.white,fontSize: 25),),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          style: TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255,238,69,64),
+                                )
+                            ),
+                            labelStyle: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                            onChanged: (value) {
+                              int? parsedValue = int.tryParse(value);
+                              if (parsedValue != null) {
+                                upperlimit = parsedValue;
+                              }
+                            },),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(height: 19),
                 ElevatedButton(
                   style: ButtonStyle(
@@ -150,6 +216,8 @@ class _CreatePartyState extends State<CreateParty> {
                       'DateTime' : datetime,
                       'Location' : location,
                       'participants' : participants,
+                      'underage' : underage,
+                      'upperlimit' : upperlimit,
                     });
                     Navigator.push(
                         context,

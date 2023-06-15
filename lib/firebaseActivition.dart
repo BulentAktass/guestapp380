@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:guestapp380/PartyDetails.dart';
 
 
 class firebaseActivition extends StatefulWidget{
@@ -8,9 +10,8 @@ class firebaseActivition extends StatefulWidget{
   @override
   State<firebaseActivition> createState() => _firebaseActivitionState();
 
-
   final CollectionReference partylist = FirebaseFirestore.instance.collection("Parties");
-
+  late String participateDialogMessage="";
   Future getPartyList() async{
     List parties = [];
     try{
@@ -46,32 +47,83 @@ class firebaseActivition extends StatefulWidget{
     try {
       List<Map<String, dynamic>> parties = [];
       String docID = "";
+      int currentIndex = 0;
+
       await partylist.get().then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((QueryDocumentSnapshot doc) {
           Map<String, dynamic> party = doc.data() as Map<String, dynamic>;
-          docID = doc.id;
           parties.add(party);
+
+          if (currentIndex == index) {
+            docID = doc.id;
+          }
+          currentIndex++;
         });
       });
-      if (index >= 0 && index < parties.length) {
-        Map<String, dynamic> thisParty = parties[index];
-        List<dynamic> participants = thisParty['participants'];
-        if (participants.contains(newParticipant)) {
-          print('You are already in the party.');
-          return;
-        }
+      Map<String, dynamic> thisParty = parties[index];
+      List<dynamic> participants = thisParty['participants'];
+      print(participants.toString());
+      int Age = 0;
+      String username="";
+      await loadUsername().then((value){
+        username = value;
+      });
+      await loadUserAge().then((int userAge) {
+        Age = userAge;
+      });
+      int underage = thisParty['underage'];
+      int upperlimit = thisParty['upperlimit'];
+      if (Age < underage || Age > upperlimit) {
+        print("You cannot enter. Your age is not within the allowed range.");
+        updateParticipateDialogMessage("You cannot enter. Your age is not within the allowed range.");
+        PartyDetails.dialogMessage = participateDialogMessage;
+        return;
+      } else if (participants.contains(newParticipant)) {
+        print('You are already in the party.');
+        updateParticipateDialogMessage('You are already in the party.');
+        PartyDetails.dialogMessage = participateDialogMessage;
+        return;
+      } else if( newParticipant == username){
+        print("You cannot participate to your own party :)");
+        updateParticipateDialogMessage("You cannot participate to your own party :)");
+        PartyDetails.dialogMessage = participateDialogMessage;
+      }
+      else {
         participants.add(newParticipant);
         thisParty['participants'] = participants;
         await partylist.doc(docID).update(thisParty);
         print('New participant added successfully!');
-      } else {
-        print('Invalid party index!');
+        updateParticipateDialogMessage('New participant added successfully!');
+        PartyDetails.dialogMessage = participateDialogMessage;
       }
-    } catch (e) {
+    }
+     catch (e) {
       print('Error adding participant: $e');
     }
   }
 
+  void updateParticipateDialogMessage(String message) {
+    participateDialogMessage = message;
+  }
+
+  Future<int> getPartyunderage(index) async{
+    List parties = [];
+    await partylist.get().then((QuerySnapshot){
+      QuerySnapshot.docs.forEach((element) {
+        parties.add(element.data());
+      });
+    });
+    return parties[index]["underage"];
+  }
+  Future<int> getPartyupperage(index) async{
+    List parties = [];
+    await partylist.get().then((QuerySnapshot){
+      QuerySnapshot.docs.forEach((element) {
+        parties.add(element.data());
+      });
+    });
+    return parties[index]["upperlimit"];
+  }
 
   Future<String> getPartyName(index) async{
     List parties = [];
@@ -83,7 +135,6 @@ class firebaseActivition extends StatefulWidget{
     return parties[index]["Name"];
   }
 
-
   Future<String> loadUsername() async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -92,6 +143,18 @@ class firebaseActivition extends StatefulWidget{
       return snapshot['userName'];
     }
     return '( USERNAME CANT LOADED )';
+  }
+  Future<int> loadUserAge() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final DocumentSnapshot snapshot =
+      await FirebaseFirestore.instance.collection('Account').doc(user.uid).get();
+      String value = snapshot['Age'];
+      int userage = int.parse(value);
+      print(userage);
+      return userage;
+    }
+    return 0;
   }
 
   Future<String> getPartyOwner(index) async{
@@ -103,6 +166,7 @@ class firebaseActivition extends StatefulWidget{
     });
     return parties[index]["PartyOwner"];
   }
+
   Future<String> getPartyOwnerUID(index) async{
     List parties = [];
     await partylist.get().then((QuerySnapshot){
