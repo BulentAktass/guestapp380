@@ -46,7 +46,8 @@ class _MainPageState extends State<MainPage> {
             SizedBox(height:55),
             Align(
               alignment: Alignment.center,
-                child: Text("GUEST",style: TextStyle(color: Color.fromARGB(255,45,19,44),fontSize: 35,letterSpacing: 3),)
+                child: Text("GUEST",style: TextStyle(color: Color.fromARGB(255,45,19,44), fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.bold,fontSize: 35,letterSpacing: 3),)
             ),
             SizedBox(height:45),
             Padding(
@@ -58,7 +59,8 @@ class _MainPageState extends State<MainPage> {
                 ),
                 child: ListTile(
                   leading: Icon(Icons.account_circle,color: Color.fromARGB(255,238,69,64),),
-                  title: Text('Profıle',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  title: Text('Profıle',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 18, fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,letterSpacing: 3),),
                   onTap: () => Navigator.push( context,
                     MaterialPageRoute(builder: (context) => ProfilePage()),),
                 ),
@@ -73,7 +75,8 @@ class _MainPageState extends State<MainPage> {
                 ),
                 child: ListTile(
                   leading: Icon(Icons.add_circle_outline,color: Color.fromARGB(255,238,69,64),),
-                  title: Text('Create Party',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  title: Text('Create Party',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 18, fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,letterSpacing: 3),),
                   onTap: () => Navigator.push( context,
                     MaterialPageRoute(builder: (context) => CreateParty()),),
                 ),
@@ -88,7 +91,8 @@ class _MainPageState extends State<MainPage> {
                 ),
                 child: ListTile(
                   leading: Icon(Icons.local_fire_department_outlined,color: Color.fromARGB(255,238,69,64),),
-                  title: Text('My Parties',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  title: Text('My Parties',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 18, fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,letterSpacing: 3),),
                   onTap: () => Navigator.push( context,
                     MaterialPageRoute(builder: (context) => MyParties()),),
                 ),
@@ -104,7 +108,8 @@ class _MainPageState extends State<MainPage> {
                 ),
                 child: ListTile(
                   leading: Icon(Icons.logout,color: Color.fromARGB(255,238,69,64),),
-                  title: Text('Logout',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 16,letterSpacing: 3),),
+                  title: Text('Logout',style: TextStyle(color: Color.fromARGB(255,238,69,64),fontSize: 18, fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,letterSpacing: 3),),
                   onTap: () => Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -127,7 +132,8 @@ class _MainPageState extends State<MainPage> {
                 SizedBox(width: 5),
                 IconButton(alignment: Alignment.topLeft,icon: Icon(Icons.menu,size: 32,),color: Color.fromARGB(255,238,69,64),onPressed: () => _scaffkey.currentState?.openDrawer()),
                 SizedBox(width: 230),
-                Text("EVENTS",style: TextStyle(fontSize: 30,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w600)),
+                Text("EVENTS",style: TextStyle(fontSize: 30,color: Color.fromARGB(255,238,69,64),
+                    fontWeight: FontWeight.w400)),
               ],
             ),
             Expanded(
@@ -162,7 +168,8 @@ class _MainPageState extends State<MainPage> {
 
                             title: Text(partiler[index]["Name"],style: TextStyle(fontSize: 18),),
                             subtitle: Text(
-                              partiler[index]["Description"],
+                              partiler[index]["Description"],style: TextStyle(fontSize: 20, fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis,
                             ),
                             trailing: Text(partiler[index]["DateTime"]),

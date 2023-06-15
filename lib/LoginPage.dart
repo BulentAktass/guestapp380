@@ -37,10 +37,10 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('GUEST',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,color: Colors.white),),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70,fontFamily: 'Montserrat',color: Colors.white),),
                   SizedBox(height: 8),
                   Text('                                     Events and more...',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,fontFamily: 'Montserrat', color: Colors.white),),
 
                   SizedBox(height: 90),
 
@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         hintText: 'E-Mail',
                         prefixText: ' ',
-                        hintStyle: TextStyle(color: Colors.white),
+                        hintStyle: TextStyle(color: Colors.white,),
                         focusColor: Colors.white,
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -128,6 +128,8 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
+                                  fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
                               ),
                             )),
                       ),
@@ -153,7 +155,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         Text(
                           "Register",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white, fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,),
                         ),
                         Container(
                           height: 1,

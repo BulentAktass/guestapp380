@@ -41,7 +41,7 @@ class _MyPartiesState extends State<MyParties> {
                 SizedBox(height: 40),
                 Align(
                   alignment: Alignment.topRight,
-                    child: Text("MY EVENTS  ",style: TextStyle(fontSize: 30,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w600))),
+                    child: Text("MY EVENTS  ",style: TextStyle(fontSize: 30,color: Color.fromARGB(255,238,69,64),fontWeight: FontWeight.w400))),
                 SizedBox(height: 10,),
                 Expanded(
                     child: ListView.builder(
@@ -75,7 +75,8 @@ class _MyPartiesState extends State<MyParties> {
                                 ),
                                 title: Text(partiler[index]["Name"],style: TextStyle(fontSize: 18),),
                                 subtitle: Text(
-                                  partiler[index]["Description"],
+                                  partiler[index]["Description"],style: TextStyle(fontSize: 20, fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 trailing: Text(partiler[index]["DateTime"]),

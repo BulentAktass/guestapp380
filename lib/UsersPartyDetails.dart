@@ -95,7 +95,8 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
                         if (snapshot.hasData) {
                           return Text(
                             snapshot.data.toString(),
-                            style: TextStyle(fontSize: 16,color: Colors.white),
+                            style: TextStyle(fontSize: 16,color: Colors.white ,fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold),
                           );
                         } else if (snapshot.hasError) {
                           return Text("Error: ${snapshot.error}");
@@ -117,7 +118,8 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
                         if (snapshot.hasData) {
                           return Text(
                             snapshot.data.toString(),
-                            style: TextStyle(fontSize: 16,color: Colors.white),
+                            style: TextStyle(fontSize: 16,color: Colors.white ,fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold),
                           );
                         } else if (snapshot.hasError) {
                           return Text("Error: ${snapshot.error}");
@@ -139,7 +141,8 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
                         if (snapshot.hasData) {
                           return Text(
                             snapshot.data.toString(),
-                            style: TextStyle(fontSize: 16,color: Colors.white),
+                            style: TextStyle(fontSize: 16,color: Colors.white ,fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold),
                           );
                         } else if (snapshot.hasError) {
                           return Text("Error: ${snapshot.error}");
@@ -161,7 +164,8 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
                         if (snapshot.hasData) {
                           return Text(
                             snapshot.data.toString(),
-                            style: TextStyle(fontSize: 16,color: Colors.white),
+                            style: TextStyle(fontSize: 16,color: Colors.white ,fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold),
                           );
                         } else if (snapshot.hasError) {
                           return Text("Error: ${snapshot.error}");
