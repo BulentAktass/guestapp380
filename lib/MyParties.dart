@@ -56,11 +56,10 @@ class _MyPartiesState extends State<MyParties> {
                               ),
                               child: ListTile(
                                 tileColor: Colors.grey[200],
-                                // Background color
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 16.0),
                                 leading: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0), // Adjust the value as needed
+                                  borderRadius: BorderRadius.circular(10.0),
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(

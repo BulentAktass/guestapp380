@@ -28,9 +28,9 @@ class _PartyDetailsState extends State<PartyDetails> {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.7), // Shadow color
-                    blurRadius: 7.0, // Spread radius of the shadow
-                    offset: Offset(0, 8), // Offset of the shadow
+                    color: Colors.grey.withOpacity(0.7),
+                    blurRadius: 7.0,
+                    offset: Offset(0, 8),
                   ),
                 ],
                 image: DecorationImage(
@@ -233,7 +233,6 @@ class _PartyDetailsState extends State<PartyDetails> {
                                         );
                                       }).toList(),
                                       onChanged: (dynamic? selectedParticipant) {
-                                        // Handle the selected participant
                                         print('Selected Participant: $selectedParticipant');
                                       },
                                     );
@@ -311,7 +310,6 @@ class _PartyDetailsState extends State<PartyDetails> {
                               child: ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255,238,69,64)), // Set the background color to red
-                                    // Additional button style properties
                                   ),
                                   onPressed: () async {
                                     try {

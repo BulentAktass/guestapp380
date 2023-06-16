@@ -149,10 +149,10 @@ class _MainPageState extends State<MainPage> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: ListTile(
-                            tileColor: Colors.grey[200], // Background color
+                            tileColor: Colors.grey[200],
                             contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                             leading: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0), // Adjust the value as needed
+                                borderRadius: BorderRadius.circular(10.0),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(

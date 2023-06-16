@@ -65,7 +65,7 @@ class firebaseActivition extends StatefulWidget{
       print(participants.toString());
       int Age = 0;
       String username="";
-      await loadUsername().then((value){
+      await getPartyOwner(index).then((value){
         username = value;
       });
       await loadUserAge().then((int userAge) {

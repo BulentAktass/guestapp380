@@ -47,6 +47,9 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
   Future<String> getPartyOwner(index) async{
     return partiler[index]["PartyOwner"];
   }
+  Future<List<dynamic>> fetchPartyParticipants(index) async{
+    return partiler[index]["participants"];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +62,9 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.7), // Shadow color
-                    blurRadius: 7.0, // Spread radius of the shadow
-                    offset: Offset(0, 8), // Offset of the shadow
+                    color: Colors.grey.withOpacity(0.7),
+                    blurRadius: 7.0,
+                    offset: Offset(0, 8),
                   ),
                 ],
                 image: DecorationImage(
@@ -234,7 +237,7 @@ class _UsersPartyDetailsState extends State<UsersPartyDetails> {
                         ),
                         SizedBox(width: 40,),
                         FutureBuilder<List<dynamic>>(
-                          future: firebaseActivition().fetchPartyParticipants(widget.length),
+                          future: fetchPartyParticipants(widget.length),
                           builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
                             if (snapshot.connectionState == ConnectionState.waiting) {
                               return CircularProgressIndicator();

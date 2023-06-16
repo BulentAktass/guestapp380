@@ -51,7 +51,7 @@ class _CreatePartyState extends State<CreateParty> {
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -60,7 +60,7 @@ class _CreatePartyState extends State<CreateParty> {
                       ),
                       labelText: 'Party Name',
                       labelStyle: TextStyle(
-                        color: Colors.white, // Set the label text color to white
+                        color: Colors.white,
                       ),
                     ),
                     onChanged: (value){
@@ -73,7 +73,7 @@ class _CreatePartyState extends State<CreateParty> {
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -82,7 +82,7 @@ class _CreatePartyState extends State<CreateParty> {
                       ),
                       labelText: 'Party Description',
                       labelStyle: TextStyle(
-                        color: Colors.white, // Set the label text color to white
+                        color: Colors.white,
                       ),
                     ),
                     onChanged: (value){
@@ -96,7 +96,7 @@ class _CreatePartyState extends State<CreateParty> {
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -105,7 +105,7 @@ class _CreatePartyState extends State<CreateParty> {
                       ),
                       labelText: 'Date Time',
                       labelStyle: TextStyle(
-                        color: Colors.white, // Set the label text color to white
+                        color: Colors.white,
                       ),
                     ),
                     onChanged: (value){
@@ -118,7 +118,7 @@ class _CreatePartyState extends State<CreateParty> {
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white), // Set the enabled border color to white
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -127,7 +127,7 @@ class _CreatePartyState extends State<CreateParty> {
                       ),
                       labelText: 'Location',
                       labelStyle: TextStyle(
-                        color: Colors.white, // Set the label text color to white
+                        color: Colors.white,
                       ),
                     ),
                     onChanged: (value){
@@ -198,8 +198,7 @@ class _CreatePartyState extends State<CreateParty> {
                 SizedBox(height: 19),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255,238,69,64)), // Set the background color to red
-                    // Additional button style properties
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255,238,69,64)),
                   ),
                   child: Text("LETS GIVE A PARTY"),
                   onPressed: () async{
